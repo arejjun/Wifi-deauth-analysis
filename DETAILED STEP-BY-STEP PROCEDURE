@@ -1,0 +1,139 @@
+# 📡 Wi-Fi Deauthentication Analysis using NodeMCU
+
+## 🚀 Overview
+
+This project demonstrates the generation, transmission, capture, and analysis of IEEE 802.11 Wi-Fi deauthentication frames using NodeMCU ESP8266 and monitor mode.
+
+The goal of this project is to understand wireless network vulnerabilities and analyze how deauthentication attacks work at the protocol level.
+
+> ⚠️ This project is strictly for educational purposes and must be performed only in an authorized environment.
+
+---
+
+## 🎯 Objectives
+
+- Study IEEE 802.11 management frames
+- Generate deauthentication frames using ESP8266
+- Capture wireless packets using monitor mode
+- Analyze packets using Wireshark
+- Understand wireless security vulnerabilities
+
+---
+
+## 🧰 Requirements
+
+### 💻 Hardware
+- NodeMCU ESP8266  
+- TP-Link Archer T2U Plus (RTL8821AU) Wi-Fi Adapter  
+- Laptop (Kali Linux)  
+- Mobile device (for testing)
+
+### 💻 Software
+- Kali Linux  
+- Arduino IDE  
+- Wireshark  
+
+---
+
+## 🌐 GitHub Repositories Used
+
+- **ESP8266 Deauther (Packet Injection Firmware)**  
+  https://github.com/SpacehuhnTech/esp8266_deauther  
+
+- **ESP8266 Board Manager Package**  
+  https://raw.githubusercontent.com/SpacehuhnTech/arduino/main/package_spacehuhn_index.json  
+
+- **RTL8821AU Driver (Wi-Fi Adapter Driver)**  
+  https://github.com/morrownr/8821au-20210708  
+
+- **Monitor Mode Script (Enable Monitor Mode Easily)**  
+  https://github.com/morrownr/Monitor_Mode  
+
+---
+
+## ⚙️ Step-by-Step Setup Guide
+
+### 🔹 Step 1: Install Kali Linux
+Download and install Kali Linux from:
+https://www.kali.org/
+
+---
+
+### 🔹 Step 2: Install Arduino IDE
+
+Download from:
+https://www.arduino.cc/en/software
+
+#### Setup:
+1. Open Arduino IDE  
+2. Go to **File → Preferences**  
+3. Add this URL:3. Add this URL:
+https://raw.githubusercontent.com/SpacehuhnTech/arduino/main/package_spacehuhn_index.json
+
+4. Go to **Tools → Board Manager**  
+5. Install **ESP8266**
+
+---
+
+### 🔹 Step 3: Flash ESP8266 Deauther Firmware
+
+Download:
+https://github.com/SpacehuhnTech/esp8266_deauther
+
+#### Steps:
+1. Open project in Arduino IDE  
+2. Connect NodeMCU via USB  
+3. Select:
+   - Board → NodeMCU ESP8266  
+   - Port → your COM port  
+4. Click **Upload**
+
+✅ After uploading:
+- A Wi-Fi network named **"pwned"** will appear
+
+---
+
+### 🔹 Step 4: Install Wi-Fi Adapter Driver
+
+```bash
+git clone https://github.com/morrownr/8821au-20210708.git
+cd 8821au-20210708
+sudo ./install-driver.sh
+Reboot your system.
+
+Step 5: Enable Monitor Mode
+git clone https://github.com/morrownr/Monitor_Mode.git
+cd Monitor_Mode
+sudo ./start-mon.sh wlan0
+
+Check:
+iwconfig
+
+Interface should change to:
+wlan0mon
+
+🔹 Step 6: Start Wireshark
+Command:wireshark
+Select interface: wlan0mon
+Start capturing packets
+
+🔹 Step 8: Perform Deauthentication Test
+Connect your phone to "pwned" network
+Open browser → 192.168.4.1
+Select target Wi-Fi
+Start deauthentication attack
+🔹 Step 9: Observe Results
+
+✔ Devices disconnect from Wi-Fi
+✔ Deauthentication packets appear in Wireshark
+✔ Analyze:
+
+Source MAC
+Destination MAC
+Reason Code
+
+///////////////////
+🔐 Ethical Use
+Use only on authorized networks
+Do not attack public Wi-Fi
+Intended for learning cybersecurity
